@@ -1,6 +1,9 @@
-/* 1. Basic Reset & Setup */
+/* ============================================================
+   1. GLOBAL RESET & BASE STYLES
+   Applies to: ALL files (index.html, gallery.html, form.html)
+   ============================================================ */
 * {
-    box-sizing: border-box;
+    box-sizing: border-box; /* Ensures padding doesn't break layout width */
     margin: 0;
     padding: 0;
 }
@@ -9,20 +12,15 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
-    display: flex;
+    display: flex; /* Used to keep footer at the bottom */
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* 2. Holy Grail Layout with CSS Grid */
-.container {
-    display: grid;
-    grid-template-columns: 200px 1fr 200px; /* Left Sidebar | Main | Right Sidebar */
-    gap: 20px;
-    padding: 20px;
-    flex: 1; /* Pushes footer to bottom */
-}
-
+/* ============================================================
+   2. SHARED LAYOUT COMPONENTS
+   Applies to: Header (with nav-placeholder) and Footer across all pages
+   ============================================================ */
 header {
     background: #2c3e50;
     color: white;
@@ -30,18 +28,57 @@ header {
     text-align: center;
 }
 
-header h1 {
+header h1, h1 {
     margin-bottom: 10px;
+    text-align: center; /* Ensures titles in gallery/form are centered */
+}
+
+/* Centering the Navigation Bar */
+#nav-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+/* Ensures the list inside the nav is also centered and horizontal */
+#nav-placeholder ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+}
+
+#nav-placeholder a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#nav-placeholder a:hover {
+    text-decoration: underline;
 }
 
 footer {
     background: #ecf0f1;
     text-align: center;
     padding: 1.5rem;
-    margin-top: auto;
+    margin-top: auto; /* Pushes footer to the very bottom of the viewport */
 }
 
-/* 3. Sidebars & Main Content */
+/* ============================================================
+   3. INDEX.HTML: HOLY GRAIL STRUCTURE
+   Applies to: The 3-column layout in index.html
+   ============================================================ */
+.container {
+    display: grid;
+    grid-template-columns: 200px 1fr 200px; /* Sidebar | Main | Sidebar */
+    gap: 20px;
+    padding: 20px;
+    flex: 1;
+}
+
+/* Styling for the Left and Right <aside> tags */
 aside {
     background: #f9f9f9;
     padding: 15px;
@@ -49,19 +86,22 @@ aside {
     height: fit-content;
 }
 
-.left-aside ul, .right-aside ul {
+aside ul {
     list-style: none;
     padding-top: 10px;
 }
 
-.left-aside li a, .right-aside li a {
+aside li a {
     text-decoration: none;
     color: #3498db;
     display: block;
     padding: 5px 0;
 }
 
-/* 4. Index: Course Grid */
+/* ============================================================
+   4. INDEX.HTML: COURSE GRID
+   Applies to: The <article> cards inside <main> on index.html
+   ============================================================ */
 .course-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -92,7 +132,10 @@ aside {
     padding: 10px;
 }
 
-/* 5. Gallery Styling */
+/* ============================================================
+   5. GALLERY.HTML: IMAGE GRID
+   Applies to: <div class="gallery"> in gallery.html
+   ============================================================ */
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -100,14 +143,14 @@ aside {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
-    width: 100%; /* Ensures gallery takes full width of container */
+    width: 100%; 
 }
 
 .gallery img {
-    width: 100%; /* Scales to container width */
-    max-width: 100%; /* Prevents overflow */
+    width: 100%;
+    max-width: 100%;
     height: 250px;
-    object-fit: cover;
+    object-fit: cover; /* Ensures images don't stretch/distort */
     border-radius: 8px;
     transition: opacity 0.3s;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -118,56 +161,64 @@ aside {
     cursor: pointer;
 }
 
-/* 6. Form Styling */
-.form-container {
-    max-width: 600px;
+/* ============================================================
+   6. FORM.HTML: CONTACT FORM
+   Applies to: The <form> and its inputs in form.html
+   ============================================================ */
+form {
+    max-width: 500px;
     margin: 40px auto;
-    padding: 30px;
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
 }
 
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
+form label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
     font-weight: 600;
 }
 
-.form-group input, 
-.form-group textarea {
+/* Targets all input types and the message textarea */
+form input[type="text"],
+form input[type="email"],
+form textarea {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
 }
 
-.button {
+form button {
     background: #3498db;
     color: white;
-    padding: 12px 24px;
+    padding: 10px 20px;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
+    font-size: 1rem;
     width: 100%;
-    text-align: center;
+    transition: background 0.3s;
 }
 
-/* 7. Responsive Design */
+form button:hover {
+    background: #2980b9;
+}
+
+/* ============================================================
+   7. RESPONSIVE DESIGN (MOBILE & TABLET)
+   Applies to: Transitions all layouts for smaller screens
+   ============================================================ */
 @media (max-width: 700px) {
-    /* Stack the Holy Grail layout */
+    /* Changes index.html Holy Grail into a single column stack */
     .container {
         grid-template-columns: 1fr;
     }
 
-    /* Keep sidebars below main content */
+    /* Places main content first, then sidebars below it */
     .left-aside, .right-aside {
         order: 2;
     }
@@ -177,15 +228,21 @@ aside {
         margin-right: 0;
     }
 
-    /* Gallery shows 2 columns on mobile/small tablets */
+    /* Sets gallery.html to exactly 2 columns */
     .gallery {
         grid-template-columns: repeat(2, 1fr);
         padding: 10px;
     }
+
+    /* Stack nav links on small screens */
+    #nav-placeholder ul {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
 
 @media (max-width: 480px) {
-    /* Single column for gallery on very small phones */
+    /* Sets gallery.html to 1 column for small phones */
     .gallery {
         grid-template-columns: 1fr;
     }
