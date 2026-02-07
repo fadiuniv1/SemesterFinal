@@ -1,9 +1,32 @@
 /* ============================================================
-   1. GLOBAL RESET & BASE STYLES
-   Applies to: ALL files (index.html, gallery.html, form.html)
+   1. GLOBAL RESET & VARIABLES
    ============================================================ */
+:root {
+    /* Define colors as variables so they can change */
+    --bg-color: #ffffff;
+    --text-color: #333;
+    --header-bg: #2c3e50;
+    --footer-bg: #ecf0f1;
+    --aside-bg: #f9f9f9;
+    --card-bg: #ffffff;
+    --border-color: #ddd;
+    --nav-link: #000000;
+}
+
+/* Colors for Dark Mode */
+body.dark-theme {
+    --bg-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --header-bg: #111;
+    --footer-bg: #111;
+    --aside-bg: #252525;
+    --card-bg: #2d2d2d;
+    --border-color: #444;
+    --nav-link: #ffffff;
+}
+
 * {
-    box-sizing: border-box; /* Ensures padding doesn't break layout width */
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -11,96 +34,75 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: #333;
-    display: flex; /* Used to keep footer at the bottom */
+    background-color: var(--bg-color); /* Added */
+    color: var(--text-color);           /* Added */
+    display: flex;
     flex-direction: column;
     min-height: 100vh;
+    transition: background 0.3s, color 0.3s; /* Smooth transition */
 }
 
 /* ============================================================
    2. SHARED LAYOUT COMPONENTS
-   Applies to: Header (with nav-placeholder) and Footer across all pages
    ============================================================ */
 header {
-    background: #2c3e50;
+    background: var(--header-bg); /* Use variable */
     color: white;
     padding: 1.5rem;
     text-align: center;
 }
 
-header h1, h1 {
-    margin-bottom: 10px;
-    text-align: center; /* Ensures titles in gallery/form are centered */
-}
-
-/* Centering the Navigation Bar */
-#nav-placeholder {
+header nav {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 15px;
-}
-
-/* Ensures the list inside the nav is also centered and horizontal */
-#nav-placeholder ul {
-    list-style: none;
-    display: flex;
     gap: 20px;
-    padding: 0;
 }
 
-#nav-placeholder a {
-    color: rgb(0, 0, 0);
+header nav a {
+    color: var(--nav-link); /* Use variable for visibility */
     text-decoration: none;
     font-weight: 500;
 }
 
-#nav-placeholder a:hover {
-    text-decoration: underline;
+header nav button {
+    padding: 8px 12px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
 }
 
 footer {
-    background: #ecf0f1;
+    background: var(--footer-bg); /* Use variable */
     text-align: center;
     padding: 1.5rem;
-    margin-top: auto; /* Pushes footer to the very bottom of the viewport */
+    margin-top: auto;
 }
 
 /* ============================================================
    3. INDEX.HTML: HOLY GRAIL STRUCTURE
-   Applies to: The 3-column layout in index.html
    ============================================================ */
 .container {
     display: grid;
-    grid-template-columns: 200px 1fr 200px; /* Sidebar | Main | Sidebar */
+    grid-template-columns: 200px 1fr 200px;
     gap: 20px;
     padding: 20px;
     flex: 1;
 }
 
-/* Styling for the Left and Right <aside> tags */
 aside {
-    background: #f9f9f9;
+    background: var(--aside-bg); /* Use variable */
     padding: 15px;
     border-radius: 8px;
     height: fit-content;
 }
 
-aside ul {
-    list-style: none;
-    padding-top: 10px;
-}
-
-aside li a {
-    text-decoration: none;
-    color: #3498db;
-    display: block;
-    padding: 5px 0;
-}
-
 /* ============================================================
-   4. INDEX.HTML: COURSE GRID
-   Applies to: The <article> cards inside <main> on index.html
+   4. INDEX.HTML: COURSE GRID & CARDS
    ============================================================ */
 .course-grid {
     display: grid;
@@ -110,31 +112,22 @@ aside li a {
 }
 
 .course-card {
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     overflow: hidden;
-    background: white;
+    background: var(--card-bg); /* Use variable */
     transition: transform 0.2s;
 }
-
-.course-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
 .course-card img {
     width: 100%;
-    height: 150px;
+    /* This keeps the image at a consistent 16:9 ratio */
+    aspect-ratio: 16 / 9; 
     object-fit: cover;
+    display: block;
+    border-bottom: 1px solid var(--border-color);
 }
-
-.course-card h4, .course-card p {
-    padding: 10px;
-}
-
 /* ============================================================
    5. GALLERY.HTML: IMAGE GRID
-   Applies to: <div class="gallery"> in gallery.html
    ============================================================ */
 .gallery {
     display: grid;
@@ -143,107 +136,137 @@ aside li a {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
-    width: 100%; 
 }
-
 .gallery img {
     width: 100%;
-    max-width: 100%;
-    height: 250px;
-    object-fit: cover; /* Ensures images don't stretch/distort */
-    border-radius: 8px;
-    transition: opacity 0.3s;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.gallery img:hover {
-    opacity: 0.8;
-    cursor: pointer;
+    border-radius: 5px;
 }
 
 /* ============================================================
-   6. FORM.HTML: CONTACT FORM
-   Applies to: The <form> and its inputs in form.html
+   6. FORM.HTML: CONTACT FORM & SIDE DATA
    ============================================================ */
+
+/* Wrapper to make form and results sit next to each other */
+.form-flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 40px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
 form {
+    flex: 1;
     max-width: 500px;
-    margin: 40px auto;
+    margin: 0; /* Removed auto-margin to allow side-by-side */
     padding: 20px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    background: #f9f9f9;
+    background: var(--aside-bg);
+}
+
+/* THE NEW DIV: This holds the submitted data next to the form */
+#display-area {
+    flex: 1;
+    max-width: 400px;
+    padding: 20px;
+    background: var(--card-bg);
+    border: 2px dashed #3498db;
+    border-radius: 8px;
+    display: none; /* Hidden until button is clicked */
+}
+
+/* Target inputs to use theme colors */
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+form input:focus, form textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
 }
 
 form label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
-}
-
-/* Targets all input types and the message textarea */
-form input[type="text"],
-form input[type="email"],
-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
+    margin-top: 15px;
+    font-weight: 500;
+    color: var(--text-color);
 }
 
 form button {
-    background: #3498db;
-    color: white;
     padding: 10px 20px;
+    background-color: #27ae60;
+    color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 1rem;
-    width: 100%;
-    transition: background 0.3s;
+    font-weight: 600;
+    margin-top: 10px;
 }
 
 form button:hover {
-    background: #2980b9;
+    background-color: #229954;
 }
 
 /* ============================================================
-   7. RESPONSIVE DESIGN (MOBILE & TABLET)
-   Applies to: Transitions all layouts for smaller screens
+   7. RESPONSIVE DESIGN
    ============================================================ */
-@media (max-width: 700px) {
-    /* Changes index.html Holy Grail into a single column stack */
-    .container {
-        grid-template-columns: 1fr;
+@media (max-width: 1024px) {
+    .container { grid-template-columns: 1fr; }
+    
+    .course-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     }
+}
 
-    /* Places main content first, then sidebars below it */
-    .left-aside, .right-aside {
-        order: 2;
+@media (max-width: 768px) {
+    .container { grid-template-columns: 1fr; }
+    
+    /* Stack the form and results vertically on mobile */
+    .form-flex-container {
+        flex-direction: column;
+        align-items: center;
     }
-
-    main {
-        order: 1;
-        margin-right: 0;
+    
+    .course-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
-
-    /* Sets gallery.html to exactly 2 columns */
+    
     .gallery {
-        grid-template-columns: repeat(2, 1fr);
-        padding: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
-
-    /* Stack nav links on small screens */
-    #nav-placeholder ul {
+    
+    header nav {
         flex-direction: column;
         gap: 10px;
     }
 }
 
 @media (max-width: 480px) {
-    /* Sets gallery.html to 1 column for small phones */
+    .course-grid {
+        grid-template-columns: 1fr;
+    }
+    
     .gallery {
         grid-template-columns: 1fr;
+    }
+    
+    form {
+        max-width: 100%;
+    }
+    
+    #display-area {
+        max-width: 100%;
     }
 }
