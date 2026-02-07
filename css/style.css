@@ -30,10 +30,14 @@ header {
     text-align: center;
 }
 
+header h1 {
+    margin-bottom: 10px;
+}
+
 footer {
     background: #ecf0f1;
     text-align: center;
-    padding: 1rem;
+    padding: 1.5rem;
     margin-top: auto;
 }
 
@@ -42,6 +46,7 @@ aside {
     background: #f9f9f9;
     padding: 15px;
     border-radius: 8px;
+    height: fit-content;
 }
 
 .left-aside ul, .right-aside ul {
@@ -68,11 +73,13 @@ aside {
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
+    background: white;
     transition: transform 0.2s;
 }
 
 .course-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .course-card img {
@@ -86,68 +93,100 @@ aside {
 }
 
 /* 5. Gallery Styling */
-.gallery-container {
+.gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 15px;
     padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%; /* Ensures gallery takes full width of container */
 }
 
-.gallery-container img {
-    width: 100%;
-    height: 200px;
+.gallery img {
+    width: 100%; /* Scales to container width */
+    max-width: 100%; /* Prevents overflow */
+    height: 250px;
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 8px;
+    transition: opacity 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.gallery img:hover {
+    opacity: 0.8;
+    cursor: pointer;
 }
 
 /* 6. Form Styling */
 .form-container {
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    margin-bottom: 8px;
+    font-weight: 600;
 }
 
-.form-group input, .form-group textarea {
+.form-group input, 
+.form-group textarea {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 6px;
 }
 
 .button {
     background: #3498db;
     color: white;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
+    width: 100%;
+    text-align: center;
 }
 
-/* 7. Responsive Design (Mobile) */
-@media (max-width: 768px) {
+/* 7. Responsive Design */
+@media (max-width: 700px) {
+    /* Stack the Holy Grail layout */
     .container {
-        grid-template-columns: 1fr; /* Stack everything vertically */
+        grid-template-columns: 1fr;
     }
-    
+
+    /* Keep sidebars below main content */
     .left-aside, .right-aside {
-        order: 2; /* Move sidebars below main content on mobile */
+        order: 2;
     }
-    
+
     main {
         order: 1;
+        margin-right: 0;
+    }
+
+    /* Gallery shows 2 columns on mobile/small tablets */
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Single column for gallery on very small phones */
+    .gallery {
+        grid-template-columns: 1fr;
     }
 }
