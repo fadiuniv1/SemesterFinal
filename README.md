@@ -5,18 +5,18 @@ This is a responsive web application built using **HTML5**, **CSS3**, and **Java
 
 ## 📂 Project Structure
 The project is organized to keep the code modular and easy to maintain:
-
+```text
 semesterfinal/
 ├── css/
-│   └── style.css          # All visual styling and layout
+│   └── style.css          # Visual styles & layout
 ├── javascript/
-│   └── script.js         # Logic and dynamic navigation loading
-├── index.html            # Home page
-├── form.html             # Contact/Data entry page
-├── gallery.html          # Image showcase page
-├── nav.html              # Shared navigation component
-└── README.md             # Project documentation
-
+│   └── script.js         # Navigation logic & interactivity
+├── index.html            # Main Landing Page
+├── form.html             # User Input/Contact Page
+├── gallery.html          # Image Showcase
+├── nav.html              # Reusable Navigation Component
+└── README.md             # Documentation
+```
 ## 🚀 Key Features
 * **Separation of Concerns:** HTML handles structure, CSS handles presentation, and JS handles behavior.
 * **Dynamic Navigation:** Uses JavaScript `fetch` to inject `nav.html` into all pages, ensuring a single point of update for the menu.
